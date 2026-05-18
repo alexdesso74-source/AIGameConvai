@@ -3,22 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="e7c5b9b3-d0ca-449e-8b85-1d3630c5be6b" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.AIGameConvai/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.AIGameConvai/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Demo convai nature.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Demo convai nature/NavMesh-Demo_Objects.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Demo convai nature/NavMesh-Demo_Objects.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Demo convai nature/NavMesh-Ground_02.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Demo convai nature/NavMesh-Ground_02.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/NavMesh-Ground_01 1.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/NavMesh-Ground_01 1.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/NavMesh-Ground_01.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/NavMesh-Ground_01.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/NavMesh-Ground_02.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/NavMesh-Ground_02.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/NavMesh-Ground_03.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/NavMesh-Ground_03.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/New Terrain.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/New Terrain.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Menu Scene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Menu Scene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Convai/Demo/Scenes/Features/Actions/Convai Demo - Actions/Convai Demo - Actions.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Convai/Demo/Scenes/Features/Actions/Convai Demo - Actions/Convai Demo - Actions.unity" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -102,7 +87,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1779103175281</updated>
-      <workItem from="1779103176793" duration="7829000" />
+      <workItem from="1779103176793" duration="9054000" />
     </task>
     <servers />
   </component>
