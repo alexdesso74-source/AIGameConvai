@@ -9,7 +9,6 @@ public class GameManager : MonoBehaviour
 {
     
     public GameObject titleScreen;
-    private int score;
     
     public Button restartButton;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
