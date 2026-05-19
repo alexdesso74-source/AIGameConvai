@@ -23,4 +23,9 @@ public class PausedMenu : MonoBehaviour
     {
         SceneManager.LoadScene(0);
     }
+
+    public void QuitButton()
+    {
+        Application.Quit();
+    }
 }
