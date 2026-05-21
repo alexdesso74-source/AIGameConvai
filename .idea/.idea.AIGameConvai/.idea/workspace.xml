@@ -2,7 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e7c5b9b3-d0ca-449e-8b85-1d3630c5be6b" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Assets/Convai/Demo/Scenes/Features/Actions/Convai Demo - Actions/Convai Demo - Actions.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Convai/Demo/Scenes/Features/Actions/Convai Demo - Actions/Convai Demo - Actions.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.AIGameConvai/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.AIGameConvai/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Convai/Prefabs/Transcript UI Canvases/Default/Convai Transcript Canvas - Chat.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Convai/Prefabs/Transcript UI Canvases/Default/Convai Transcript Canvas - Chat.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Convai Demo - Actions/Convai Demo - Actions.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Convai Demo - Actions/Convai Demo - Actions.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/AutoRegisterInteractable.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/AutoRegisterInteractable.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/PausedMenu.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/PausedMenu.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,29 +22,29 @@
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.inputsystem@57d0e36f6123/InputSystem/Devices/Commands/QueryEnabledStateCommand.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.inputsystem@57d0e36f6123/InputSystem/Devices/Commands/SetIMECursorPositionCommand.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 8,
-  "fromUser": false
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 8,
+  &quot;fromUser&quot;: false
+}</component>
   <component name="ProjectId" id="3DtZ9PzrIt0RMLpf3J8vEzRcPm9" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.cidr.known.project.marker": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.readMode.enableVisualFormatting": "true",
-    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "cidr.known.project.marker": "true",
-    "codeWithMe.voiceChat.enabledByDefault": "false",
-    "git-widget-placeholder": "develop",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;develop&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
     <configuration name="Start Unity" type="RunUnityExe" factoryName="Unity Executable">
       <option name="EXE_PATH" value="C:\Program Files\Unity\Hub\Editor\6000.3.10f1\Editor\Unity.exe" />
@@ -87,6 +91,8 @@
       <option name="presentableId" value="Default" />
       <updated>1779103175281</updated>
       <workItem from="1779103176793" duration="9672000" />
+      <workItem from="1779185976208" duration="3883000" />
+      <workItem from="1779357009196" duration="3776000" />
     </task>
     <servers />
   </component>
