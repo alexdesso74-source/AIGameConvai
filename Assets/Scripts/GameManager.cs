@@ -34,4 +34,9 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(type);
         titleScreen.SetActive(false);
     }
+    
+    public void QuitButton()
+    {
+        Application.Quit();
+    }
 }

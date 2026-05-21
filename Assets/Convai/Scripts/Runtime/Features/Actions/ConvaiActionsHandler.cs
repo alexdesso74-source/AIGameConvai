@@ -22,7 +22,8 @@ namespace Convai.Scripts.Runtime.Features
         PickUp,
         Drop,
         Throw,
-        PassThrough
+        PassThrough,
+        Sit
     }
 
     /// <summary>
@@ -101,8 +102,9 @@ namespace Convai.Scripts.Runtime.Features
                 new() { action = "Drop", actionChoice = ActionChoice.Drop },
                 new() { action = "Crouch", actionChoice = ActionChoice.Crouch },
                 new() { action = "Jump", actionChoice = ActionChoice.Jump },
-                new() { action = "Throw",actionChoice = ActionChoice.Throw },
+                new() { action = "Throw", actionChoice = ActionChoice.Throw },
                 new() { action = "Pass Through", actionChoice = ActionChoice.PassThrough },
+                new() { action = "Sit", actionChoice = ActionChoice.Sit },
             };
         }
 
@@ -125,14 +127,18 @@ namespace Convai.Scripts.Runtime.Features
             _playActionListCoroutine = StartCoroutine(PlayActionList());
         }
 
-        private void OnEnable() {
-            if ( _playActionListCoroutine != null ) {
+        private void OnEnable()
+        {
+            if (_playActionListCoroutine != null)
+            {
                 _playActionListCoroutine = StartCoroutine(PlayActionList());
             }
         }
-        
-        private void OnDisable() {
-            if ( _playActionListCoroutine != null ) {
+
+        private void OnDisable()
+        {
+            if (_playActionListCoroutine != null)
+            {
                 StopCoroutine(_playActionListCoroutine);
             }
         }
@@ -184,14 +190,16 @@ namespace Convai.Scripts.Runtime.Features
                     .FirstOrDefault();
 
                 // If no close match is found, continue to the next iteration
-                if (matchingAction == null || LevenshteinDistance(matchingAction.action.ToLower(), actionString.ToLower()) > 2) continue;
+                if (matchingAction == null ||
+                    LevenshteinDistance(matchingAction.action.ToLower(), actionString.ToLower()) > 2) continue;
 
                 // Find the target object for the action
                 GameObject targetObject = FindTargetObject(objectPart);
                 LogActionResult(verbPart, objectPart, targetObject);
 
                 // Add the parsed action to the action list
-                _actionList.Add(new ConvaiAction(matchingAction.actionChoice, targetObject, matchingAction.animationName));
+                _actionList.Add(new ConvaiAction(matchingAction.actionChoice, targetObject,
+                    matchingAction.animationName));
                 break;
             }
         }
@@ -261,7 +269,8 @@ namespace Convai.Scripts.Runtime.Features
             if (targetObject != null)
             {
                 ConvaiLogger.DebugLog($"Active Target: {obj}", ConvaiLogger.LogCategory.Actions);
-                ConvaiLogger.DebugLog($"Found matching target: {targetObject.name} for action: {verb}", ConvaiLogger.LogCategory.Actions);
+                ConvaiLogger.DebugLog($"Found matching target: {targetObject.name} for action: {verb}",
+                    ConvaiLogger.LogCategory.Actions);
             }
             else
             {
@@ -328,7 +337,7 @@ namespace Convai.Scripts.Runtime.Features
                     // Call the PickUp function and yield until it's completed
                     yield return PickUp(action.Target);
                     break;
-                
+
                 case ActionChoice.Drop:
                     // Call the Drop function
                     Drop(action.Target);
@@ -343,22 +352,25 @@ namespace Convai.Scripts.Runtime.Features
                     // Call the Crouch function and yield until it's completed
                     yield return Crouch();
                     break;
-                
+
                 case ActionChoice.Throw:
                     yield return Throw(action.Target);
                     break;
                 case ActionChoice.PassThrough:
                     yield return PassThroughAndMoveTo(action.Target);
                     break;
-                
+                case ActionChoice.Sit:
+                    yield return Sit(action.Target);
+                    break;
+
                 case ActionChoice.None:
                     // Call the AnimationActions function and yield until it's completed
                     yield return AnimationActions(action.Animation);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
-                
-                
+
+
             }
 
             // Yield once to ensure the coroutine advances to the next frame
@@ -389,7 +401,8 @@ namespace Convai.Scripts.Runtime.Features
             if (!animator.HasState(0, animationHash))
             {
                 // Logging a message to indicate that the animation was not found.
-                ConvaiLogger.DebugLog("Could not find an animator state named: " + animationName, ConvaiLogger.LogCategory.Actions);
+                ConvaiLogger.DebugLog("Could not find an animator state named: " + animationName,
+                    ConvaiLogger.LogCategory.Actions);
 
                 // Exiting the coroutine early since the animation is not available.
                 yield break;
@@ -614,7 +627,8 @@ namespace Convai.Scripts.Runtime.Features
             if (path.status == NavMeshPathStatus.PathInvalid || path.status == NavMeshPathStatus.PathPartial)
             {
                 ConvaiLogger.DebugLog($"Path to {target.name} is unreachable.", ConvaiLogger.LogCategory.Actions);
-                _currentNPC.SendTextDataAsync($"You cannot reach {target.name}, there is an obstacle blocking the path. Tell the player.");
+                _currentNPC.SendTextDataAsync(
+                    $"You cannot reach {target.name}, there is an obstacle blocking the path. Tell the player.");
                 return false;
             }
 
@@ -691,7 +705,8 @@ namespace Convai.Scripts.Runtime.Features
                 {
                     targetRotation.x = 0;
                     targetRotation.z = 0;
-                    transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, elapsedTime / rotationTime);
+                    transform.rotation =
+                        Quaternion.Slerp(transform.rotation, targetRotation, elapsedTime / rotationTime);
                     elapsedTime += Time.deltaTime;
                     yield return null;
                 }
@@ -795,7 +810,7 @@ namespace Convai.Scripts.Runtime.Features
 
             ActionEnded?.Invoke("Drop", target);
         }
-        
+
         private IEnumerator Jump()
         {
             ActionStarted?.Invoke("Jump", _currentNPC.gameObject);
@@ -862,6 +877,7 @@ namespace Convai.Scripts.Runtime.Features
             yield return new WaitForSeconds(1.5f);
             _currentNPC.GetComponent<Animator>().CrossFade(Animator.StringToHash("Idle"), 0.05f);
         }
+
         private IEnumerator PassThroughAndMoveTo(GameObject target)
         {
             Animator animator = _currentNPC.GetComponent<Animator>();
@@ -887,21 +903,22 @@ namespace Convai.Scripts.Runtime.Features
 
             animator.CrossFade(Animator.StringToHash("Idle"), 0.1f);
         }
+
         public class MatchTargetParameters
         {
             public Vector3 matchPos;
             public Vector3 matchPosWeight;
-    
+
             public AvatarTarget matchBodyPart;
-    
+
             public float matchStartTime;
             public float matchTargetTime;
-    
-    
-    
+
+
+
         }
-        
-         private void MatchTarget(global::MatchTargetParameters matchTargetParams)
+
+        private void MatchTarget(global::MatchTargetParameters matchTargetParams)
         {
             Animator m_animator = _currentNPC.GetComponent<Animator>();
             if (m_animator.isMatchingTarget || m_animator.IsInTransition(0)) return;
@@ -915,13 +932,14 @@ namespace Convai.Scripts.Runtime.Features
                 matchTargetParams.matchTargetTime
             );
         }
+
         public IEnumerator PerformVaulting(string animName, global::MatchTargetParameters matchTargetParameters = null,
             Quaternion targetRotation = new Quaternion(), bool shouldRotate = false, bool mirrored = false)
         {
             float rotationSpeed = 5f;
             Animator m_animator = _currentNPC.GetComponent<Animator>();
             Rigidbody m_rigidBody = _currentNPC.GetComponent<Rigidbody>();
-    
+
             IsVaulting = true;
             m_rigidBody.linearVelocity = Vector3.zero;
             m_rigidBody.angularVelocity = Vector3.zero;
@@ -929,22 +947,24 @@ namespace Convai.Scripts.Runtime.Features
             m_animator.SetBool("IsVaulting", true);
             m_animator.CrossFadeInFixedTime(animName, 0.2f);
 
-   
+
             float timeout = 3f;
             float timer = 0f;
 
-            yield return new WaitUntil(() => {
+            yield return new WaitUntil(() =>
+            {
                 timer += Time.deltaTime;
                 return m_animator.IsInTransition(0) || timer >= timeout;
             });
 
             timer = 0f;
-            yield return new WaitUntil(() => {
+            yield return new WaitUntil(() =>
+            {
                 timer += Time.deltaTime;
                 return !m_animator.IsInTransition(0) || timer >= timeout;
             });
 
-            
+
             var animState = m_animator.GetCurrentAnimatorStateInfo(0);
             float animLength = animState.length > 0 ? animState.length * 0.85f : 1f;
 
@@ -972,7 +992,37 @@ namespace Convai.Scripts.Runtime.Features
             IsVaulting = false;
             Debug.Log("Vault terminé");
         }
-        #endregion
-    }
     
+
+    private IEnumerator Sit(GameObject target)
+    {
+        NavMeshAgent navMeshAgent = _currentNPC.GetComponent<NavMeshAgent>();
+        yield return null;
+    }
+    /*
+    public void GoSitOn(Chair chair)
+    {
+        NavMeshAgent navMeshAgent = _currentNPC.GetComponent<NavMeshAgent>();
+        Animator animator = _currentNPC.GetComponent<Animator>();
+        if (chair.isOccupied) return;
+
+        targetChair = chair;
+        chair.isOccupied = true;
+
+        agent.SetDestination(chair.sitPoint.position);
+    }
+
+    public void StandUp()
+    {
+        NavMeshAgent navMeshAgent = _currentNPC.GetComponent<NavMeshAgent>();
+        Animator animator = _currentNPC.GetComponent<Animator>();
+        isSitting = false;
+        agent.isStopped = false;
+        targetChair.isOccupied = false;
+        targetChair = null;
+
+        animator.SetBool("isSitting", false);
+    }*/
+    #endregion
+    }
 }
