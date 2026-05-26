@@ -3,10 +3,15 @@
   <component name="ChangeListManager">
     <list default="true" id="e7c5b9b3-d0ca-449e-8b85-1d3630c5be6b" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.AIGameConvai/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.AIGameConvai/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Convai/Art/Resources/Masculine NPC Animator.controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Convai/Art/Resources/Masculine NPC Animator.controller" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Convai/Prefabs/Base Scene Essentials/Convai Essentials.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Convai/Prefabs/Base Scene Essentials/Convai Essentials.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Convai/Scripts/Runtime/Features/Actions/ConvaiActionsHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Convai/Scripts/Runtime/Features/Actions/ConvaiActionsHandler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/ConvaiAPIKey.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/ConvaiAPIKey.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Convai Demo - Actions/Convai Demo - Actions 1.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Convai Demo - Actions/Convai Demo - Actions 1.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Convai Demo - Actions/Convai Demo - Actions.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Convai Demo - Actions/Convai Demo - Actions.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/Menu Scene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Menu Scene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Button Scripts/TypeGameButton.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Button Scripts/TypeGameButton.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Prefabs/Chair1.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Tables and Chairs/Prefabs/Chair1.prefab" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -92,7 +97,8 @@
       <updated>1779103175281</updated>
       <workItem from="1779103176793" duration="9672000" />
       <workItem from="1779185976208" duration="3883000" />
-      <workItem from="1779357009196" duration="5954000" />
+      <workItem from="1779357009196" duration="9654000" />
+      <workItem from="1779787317949" duration="9661000" />
     </task>
     <servers />
   </component>

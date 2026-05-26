@@ -23,7 +23,8 @@ namespace Convai.Scripts.Runtime.Features
         Drop,
         Throw,
         PassThrough,
-        Sit
+        Sit,
+        StandUp
     }
 
     /// <summary>
@@ -43,7 +44,8 @@ namespace Convai.Scripts.Runtime.Features
         private ConvaiInteractablesData _interactablesData;
         private Coroutine _playActionListCoroutine;
         public bool IsVaulting = false;
-
+        private bool isSitting = false;
+        private GameObject _lastTarget;
         // Awake is called when the script instance is being loaded
         private void Awake()
         {
@@ -105,6 +107,7 @@ namespace Convai.Scripts.Runtime.Features
                 new() { action = "Throw", actionChoice = ActionChoice.Throw },
                 new() { action = "Pass Through", actionChoice = ActionChoice.PassThrough },
                 new() { action = "Sit", actionChoice = ActionChoice.Sit },
+                new() { action = "Stand Up", actionChoice = ActionChoice.StandUp }
             };
         }
 
@@ -197,7 +200,13 @@ namespace Convai.Scripts.Runtime.Features
                 GameObject targetObject = FindTargetObject(objectPart);
                 LogActionResult(verbPart, objectPart, targetObject);
 
+                if (targetObject == null && _lastTarget != null)
+                    targetObject = _lastTarget;
+                else if (targetObject != null)
+                    _lastTarget = targetObject;
+                
                 // Add the parsed action to the action list
+                //Debug.Log($"Action parsée : {matchingAction.actionChoice} | Target : {targetObject?.name ?? "NULL"}");
                 _actionList.Add(new ConvaiAction(matchingAction.actionChoice, targetObject,
                     matchingAction.animationName));
                 break;
@@ -324,7 +333,7 @@ namespace Convai.Scripts.Runtime.Features
         {
             // STEP 2: Add the function call for your action here corresponding to your enum.
             //         Remember to yield until its return if it is an Enumerator function.
-
+            Debug.Log($"DoAction : {action.Verb}");
             // Use a switch statement to handle different action choices based on the ActionChoice enum
             switch (action.Verb)
             {
@@ -361,6 +370,9 @@ namespace Convai.Scripts.Runtime.Features
                     break;
                 case ActionChoice.Sit:
                     yield return Sit(action.Target);
+                    break;
+                case ActionChoice.StandUp:
+                    yield return StandUp();
                     break;
 
                 case ActionChoice.None:
@@ -806,6 +818,7 @@ namespace Convai.Scripts.Runtime.Features
 
             ConvaiLogger.DebugLog($"Dropping Target: {target.name}", ConvaiLogger.LogCategory.Actions);
             target.transform.parent = null;
+            target.transform.position = transform.position;
             target.SetActive(true);
 
             ActionEnded?.Invoke("Drop", target);
@@ -994,35 +1007,103 @@ namespace Convai.Scripts.Runtime.Features
         }
     
 
-    private IEnumerator Sit(GameObject target)
-    {
-        NavMeshAgent navMeshAgent = _currentNPC.GetComponent<NavMeshAgent>();
-        yield return null;
-    }
-    /*
-    public void GoSitOn(Chair chair)
-    {
-        NavMeshAgent navMeshAgent = _currentNPC.GetComponent<NavMeshAgent>();
-        Animator animator = _currentNPC.GetComponent<Animator>();
-        if (chair.isOccupied) return;
+        private IEnumerator Sit(GameObject target)
+        {
+            NavMeshAgent navMeshAgent = _currentNPC.GetComponent<NavMeshAgent>();
+            Animator m_animator = _currentNPC.GetComponent<Animator>();
 
-        targetChair = chair;
-        chair.isOccupied = true;
+            if (target == null) { Debug.LogError("Sit : target est null"); yield break; }
+            if (!target.TryGetComponent<Chair>(out Chair chair)) { Debug.LogError("Sit : pas de script Chair"); yield break; }
+            if (chair.sitPoint == null) { Debug.LogError("Sit : sitPoint non assigné"); yield break; }
+            if (chair.isOccupied) yield break;
 
-        agent.SetDestination(chair.sitPoint.position);
-    }
+            chair.isOccupied = true;
 
-    public void StandUp()
-    {
-        NavMeshAgent navMeshAgent = _currentNPC.GetComponent<NavMeshAgent>();
-        Animator animator = _currentNPC.GetComponent<Animator>();
-        isSitting = false;
-        agent.isStopped = false;
-        targetChair.isOccupied = false;
-        targetChair = null;
+            // Utilise la même logique que MoveTo qui fonctionne déjà
+            //m_animator.CrossFade(Animator.StringToHash("Walking"), 0.01f);
+            //m_animator.applyRootMotion = false;
+            //navMeshAgent.updateRotation = false;
+            //navMeshAgent.SetDestination(chair.sitPoint.position);
 
-        animator.SetBool("isSitting", false);
-    }*/
+            // Attend que le chemin soit calculé d'abord
+            //yield return new WaitUntil(() => !navMeshAgent.pathPending);
+
+            // Attend l'arrivée avec un timeout de sécurité
+            // Attend l'arrivée
+            float timeout = 10f;
+            float timer = 0f;
+            while (navMeshAgent.remainingDistance > 0.5f)
+            {
+                timer += Time.deltaTime;
+                if (timer >= timeout) break;
+                yield return null;
+            }
+
+// Attends une frame supplémentaire pour que FinishMovement se termine
+            yield return null;
+            yield return null;
+
+// Maintenant snap
+            navMeshAgent.isStopped = true;
+            navMeshAgent.enabled = false;
+            transform.position = chair.sitPoint.position;
+            transform.rotation = chair.sitPoint.rotation;
+            m_animator.applyRootMotion = false;
+            m_animator.SetBool("IsSitting", true);
+
+            if (TryGetComponent<ConvaiHeadTracking>(out var headTracking))
+                headTracking.SetActionRunning(true);
+
+            isSitting = true;
+
+// Mémorise la position assise
+            Vector3 sitPosition = chair.sitPoint.position;
+            Quaternion sitRotation = chair.sitPoint.rotation;
+
+// Coroutine interne pour forcer la position
+            StartCoroutine(LockPosition(sitPosition, sitRotation));
+
+            yield return new WaitUntil(() => !isSitting);
+            Debug.Log("WaitUntil terminé !");
+        }
+        
+        private IEnumerator StandUp()
+        {
+            Debug.Log($"StandUp appelé, isSitting = {isSitting}");
+            if (!isSitting) { Debug.LogWarning("StandUp : pas assis, on ignore"); yield break; }
+
+
+            
+
+            Animator m_animator = _currentNPC.GetComponent<Animator>();
+            NavMeshAgent navMeshAgent = _currentNPC.GetComponent<NavMeshAgent>();
+
+            isSitting = false;
+            m_animator.SetBool("IsSitting", false);
+
+            yield return new WaitForSeconds(0.11f);
+            AnimatorClipInfo[] clipInfo = m_animator.GetCurrentAnimatorClipInfo(0);
+            float length = (clipInfo != null && clipInfo.Length > 0) ? clipInfo[0].clip.length : 1f;
+            yield return new WaitForSeconds(length);
+
+            navMeshAgent.enabled = true;
+            m_animator.applyRootMotion = true;
+            m_animator.CrossFadeInFixedTime(Animator.StringToHash("Idle"), 0.1f);
+
+            if (TryGetComponent<ConvaiHeadTracking>(out var headTracking))
+                headTracking.SetActionRunning(false);
+
+            Debug.Log("StandUp : debout !");
+        }
+        private IEnumerator LockPosition(Vector3 position, Quaternion rotation)
+        {
+            while (isSitting)
+            {
+                transform.position = position;
+                transform.rotation = rotation;
+                yield return null;
+            }
+        }
     #endregion
     }
 }
