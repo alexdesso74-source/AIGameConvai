@@ -4,14 +4,11 @@
     <list default="true" id="e7c5b9b3-d0ca-449e-8b85-1d3630c5be6b" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.AIGameConvai/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.AIGameConvai/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Convai/Art/Resources/Masculine NPC Animator.controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Convai/Art/Resources/Masculine NPC Animator.controller" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Convai/Prefabs/Base Scene Essentials/Convai Essentials.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Convai/Prefabs/Base Scene Essentials/Convai Essentials.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Convai/Scripts/Runtime/Features/Actions/ConvaiActionsHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Convai/Scripts/Runtime/Features/Actions/ConvaiActionsHandler.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/Convai Demo - Actions/Convai Demo - Actions 1.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Convai Demo - Actions/Convai Demo - Actions 1.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/Convai Demo - Actions/Convai Demo - Actions.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Convai Demo - Actions/Convai Demo - Actions.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Menu Scene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Menu Scene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Button Scripts/TypeGameButton.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Button Scripts/TypeGameButton.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Prefabs/Chair1.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Tables and Chairs/Prefabs/Chair1.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Convai Demo - Actions/NavMesh-Ground.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Convai Demo - Actions/NavMesh-Ground.asset.meta" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,6 +20,7 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5a52b1892b824c9daba80ee3387c73e522800/06/7e3a6869/Microphone.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/63bc446b5041409caf89d5b8a3f308c712a00/9b/12d05a9d/NavMeshPathStatus.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Button Scripts/PageButton.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.inputsystem@57d0e36f6123/InputSystem/Devices/Commands/QueryEnabledStateCommand.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.inputsystem@57d0e36f6123/InputSystem/Devices/Commands/SetIMECursorPositionCommand.cs" root0="SKIP_HIGHLIGHTING" />
@@ -98,7 +96,8 @@
       <workItem from="1779103176793" duration="9672000" />
       <workItem from="1779185976208" duration="3883000" />
       <workItem from="1779357009196" duration="9654000" />
-      <workItem from="1779787317949" duration="9661000" />
+      <workItem from="1779787317949" duration="11109000" />
+      <workItem from="1779893411864" duration="1349000" />
     </task>
     <servers />
   </component>

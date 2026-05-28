@@ -363,6 +363,7 @@ namespace Convai.Scripts.Runtime.Features
                     break;
 
                 case ActionChoice.Throw:
+                    
                     yield return Throw(action.Target);
                     break;
                 case ActionChoice.PassThrough:
@@ -632,9 +633,18 @@ namespace Convai.Scripts.Runtime.Features
                 return false;
             }
 
-            NavMeshPath path = new NavMeshPath();
             NavMeshAgent navMeshAgent = _currentNPC.GetComponent<NavMeshAgent>();
-            navMeshAgent.CalculatePath(CalculateTargetDestination(target), path);
+            Vector3 destination = CalculateTargetDestination(target);
+    
+            // Vérifie que la destination est sur le NavMesh
+            if (!NavMesh.SamplePosition(destination, out NavMeshHit hit, 2f, NavMesh.AllAreas))
+            {
+                ConvaiLogger.DebugLog($"Destination de {target.name} hors du NavMesh.", ConvaiLogger.LogCategory.Actions);
+                return false;
+            }
+
+            NavMeshPath path = new NavMeshPath();
+            navMeshAgent.CalculatePath(hit.position, path);
 
             if (path.status == NavMeshPathStatus.PathInvalid || path.status == NavMeshPathStatus.PathPartial)
             {
@@ -657,16 +667,13 @@ namespace Convai.Scripts.Runtime.Features
         private Vector3 CalculateTargetDestination(GameObject target)
         {
             Vector3 targetDestination = target.transform.position;
-            if (target.TryGetComponent(out Renderer rendererComponent))
+    
+            // Cherche le point le plus proche sur le NavMesh
+            if (NavMesh.SamplePosition(targetDestination, out NavMeshHit hit, 2f, NavMesh.AllAreas))
             {
-                float zOffset = rendererComponent.bounds.size.z;
-                targetDestination += zOffset * target.transform.forward;
+                return hit.position;
             }
-            else
-            {
-                targetDestination += 0.5f * target.transform.forward;
-            }
-
+    
             return targetDestination;
         }
 
@@ -893,6 +900,7 @@ namespace Convai.Scripts.Runtime.Features
 
         private IEnumerator PassThroughAndMoveTo(GameObject target)
         {
+            ActionStarted?.Invoke("PassThrough", _currentNPC.gameObject);
             Animator animator = _currentNPC.GetComponent<Animator>();
             VaultingConvai vault = _currentNPC.GetComponent<VaultingConvai>();
 
@@ -915,6 +923,7 @@ namespace Convai.Scripts.Runtime.Features
             foreach (var link in navLinks) link.enabled = false;
 
             animator.CrossFade(Animator.StringToHash("Idle"), 0.1f);
+            ActionEnded?.Invoke("PassThrough", _currentNPC.gameObject);
         }
 
         public class MatchTargetParameters
@@ -1009,6 +1018,7 @@ namespace Convai.Scripts.Runtime.Features
 
         private IEnumerator Sit(GameObject target)
         {
+            ActionStarted?.Invoke("Sit", _currentNPC.gameObject);
             NavMeshAgent navMeshAgent = _currentNPC.GetComponent<NavMeshAgent>();
             Animator m_animator = _currentNPC.GetComponent<Animator>();
 
@@ -1017,13 +1027,13 @@ namespace Convai.Scripts.Runtime.Features
             if (chair.sitPoint == null) { Debug.LogError("Sit : sitPoint non assigné"); yield break; }
             if (chair.isOccupied) yield break;
 
-            chair.isOccupied = true;
+            //chair.isOccupied = true;
 
             // Utilise la même logique que MoveTo qui fonctionne déjà
             //m_animator.CrossFade(Animator.StringToHash("Walking"), 0.01f);
             //m_animator.applyRootMotion = false;
             //navMeshAgent.updateRotation = false;
-            //navMeshAgent.SetDestination(chair.sitPoint.position);
+            navMeshAgent.SetDestination(chair.sitPoint.position);
 
             // Attend que le chemin soit calculé d'abord
             //yield return new WaitUntil(() => !navMeshAgent.pathPending);
@@ -1045,7 +1055,7 @@ namespace Convai.Scripts.Runtime.Features
 
 // Maintenant snap
             navMeshAgent.isStopped = true;
-            navMeshAgent.enabled = false;
+            navMeshAgent.velocity = Vector3.zero;
             transform.position = chair.sitPoint.position;
             transform.rotation = chair.sitPoint.rotation;
             m_animator.applyRootMotion = false;
@@ -1063,37 +1073,37 @@ namespace Convai.Scripts.Runtime.Features
 // Coroutine interne pour forcer la position
             StartCoroutine(LockPosition(sitPosition, sitRotation));
 
-            yield return new WaitUntil(() => !isSitting);
+            //yield return new WaitUntil(() => !isSitting);
             Debug.Log("WaitUntil terminé !");
+            ActionEnded?.Invoke("Sit", _currentNPC.gameObject);
         }
         
         private IEnumerator StandUp()
         {
+            ActionStarted?.Invoke("StandUp", _currentNPC.gameObject);
             Debug.Log($"StandUp appelé, isSitting = {isSitting}");
             if (!isSitting) { Debug.LogWarning("StandUp : pas assis, on ignore"); yield break; }
-
-
             
-
             Animator m_animator = _currentNPC.GetComponent<Animator>();
             NavMeshAgent navMeshAgent = _currentNPC.GetComponent<NavMeshAgent>();
 
             isSitting = false;
             m_animator.SetBool("IsSitting", false);
 
-            yield return new WaitForSeconds(0.11f);
-            AnimatorClipInfo[] clipInfo = m_animator.GetCurrentAnimatorClipInfo(0);
-            float length = (clipInfo != null && clipInfo.Length > 0) ? clipInfo[0].clip.length : 1f;
-            yield return new WaitForSeconds(length);
-
-            navMeshAgent.enabled = true;
+            navMeshAgent.isStopped = false;
+            navMeshAgent.Warp(transform.position);
             m_animator.applyRootMotion = true;
             m_animator.CrossFadeInFixedTime(Animator.StringToHash("Idle"), 0.1f);
+
+// Attends que le NavMeshAgent soit bien replacé sur le NavMesh
+            yield return new WaitForSeconds(0.2f);
+            yield return new WaitUntil(() => navMeshAgent.isOnNavMesh);
 
             if (TryGetComponent<ConvaiHeadTracking>(out var headTracking))
                 headTracking.SetActionRunning(false);
 
             Debug.Log("StandUp : debout !");
+            ActionEnded?.Invoke("StandUp", _currentNPC.gameObject);
         }
         private IEnumerator LockPosition(Vector3 position, Quaternion rotation)
         {
@@ -1103,6 +1113,9 @@ namespace Convai.Scripts.Runtime.Features
                 transform.rotation = rotation;
                 yield return null;
             }
+            // Warp après l'assise pour replacer l'agent
+            NavMeshAgent agent = _currentNPC.GetComponent<NavMeshAgent>();
+            if (agent != null) agent.Warp(transform.position);
         }
     #endregion
     }
