@@ -363,16 +363,21 @@ namespace Convai.Scripts.Runtime.Features
                     break;
 
                 case ActionChoice.Throw:
-                    
+                    // Call the Throw function and yield until it's completed
                     yield return Throw(action.Target);
                     break;
                 case ActionChoice.PassThrough:
+                    // Call the PassThrough function and yield until it's completed
                     yield return PassThroughAndMoveTo(action.Target);
                     break;
+                
                 case ActionChoice.Sit:
+                    // Call the Sit function and yield until it's completed
                     yield return Sit(action.Target);
                     break;
+                
                 case ActionChoice.StandUp:
+                    // Call the StandUp function and yield until it's completed
                     yield return StandUp();
                     break;
 
@@ -569,16 +574,26 @@ namespace Convai.Scripts.Runtime.Features
 
         #region Action Implementation Methods
 
+        /// <summary>
+        ///     Coroutine to make the NPC crouch, shrink the collider, play the animation, then return to idle.
+        /// </summary>
         private IEnumerator Crouch()
         {
+            // Notify listeners that the Crouch action has started
             ActionStarted?.Invoke("Crouch", _currentNPC.gameObject);
+
             ConvaiLogger.DebugLog("Crouching!", ConvaiLogger.LogCategory.Actions);
+
+            // Retrieve the Animator component from the current NPC
             Animator animator = _currentNPC.GetComponent<Animator>();
+
+            // Play the crouch animation with a cross-fade transition
             animator.CrossFadeInFixedTime(Animator.StringToHash("Crouch"), 0.1f);
 
-            // Wait for the next frame to ensure the Animator has transitioned to the new state.
+            // Wait for the Animator to transition to the crouch state
             yield return new WaitForSeconds(0.11f);
 
+            // Get the length of the crouch animation clip
             AnimatorClipInfo[] clipInfo = animator.GetCurrentAnimatorClipInfo(0);
             if (clipInfo == null || clipInfo.Length == 0)
             {
@@ -588,24 +603,46 @@ namespace Convai.Scripts.Runtime.Features
 
             float length = clipInfo[0].clip.length;
 
+            // Shrink the first CapsuleCollider to match the crouched height
             _currentNPC.GetComponents<CapsuleCollider>()[0].height = 1.2f;
             _currentNPC.GetComponents<CapsuleCollider>()[0].center = new Vector3(0, 0.6f, 0);
 
+            // Shrink the second CapsuleCollider if it exists (Convai uses two colliders)
             if (_currentNPC.GetComponents<CapsuleCollider>().Length > 1)
             {
                 _currentNPC.GetComponents<CapsuleCollider>()[1].height = 1.2f;
                 _currentNPC.GetComponents<CapsuleCollider>()[1].center = new Vector3(0, 0.6f, 0);
             }
 
+            // Wait for the crouch animation to finish
             yield return new WaitForSeconds(length);
+
+            // Restore the CapsuleCollider to its standing height
+            _currentNPC.GetComponents<CapsuleCollider>()[0].height = 1.8f;
+            _currentNPC.GetComponents<CapsuleCollider>()[0].center = new Vector3(0, 0.9f, 0);
+
+            if (_currentNPC.GetComponents<CapsuleCollider>().Length > 1)
+            {
+                _currentNPC.GetComponents<CapsuleCollider>()[1].height = 1.8f;
+                _currentNPC.GetComponents<CapsuleCollider>()[1].center = new Vector3(0, 0.9f, 0);
+            }
+
+            // Transition back to the idle animation
             animator.CrossFadeInFixedTime(Animator.StringToHash("Idle"), 0.1f);
 
             yield return null;
+
+            // Notify listeners that the Crouch action has ended
             ActionEnded?.Invoke("Crouch", _currentNPC.gameObject);
         }
 
+        /// <summary>
+        ///     Coroutine to move the NPC to a target GameObject using the NavMeshAgent.
+        /// </summary>
+        /// <param name="target">The target GameObject to move to.</param>
         private IEnumerator MoveTo(GameObject target)
         {
+            // Validate the target before attempting to move
             if (!IsTargetValid(target)) yield break;
 
             ConvaiLogger.DebugLog($"Moving to Target: {target.name}", ConvaiLogger.LogCategory.Actions);
@@ -614,19 +651,29 @@ namespace Convai.Scripts.Runtime.Features
             Animator animator = _currentNPC.GetComponent<Animator>();
             NavMeshAgent navMeshAgent = _currentNPC.GetComponent<NavMeshAgent>();
 
+            // Set up the walking animation and navigation settings
             SetupAnimationAndNavigation(animator, navMeshAgent);
 
+            // Calculate and set the destination
             Vector3 targetDestination = CalculateTargetDestination(target);
             navMeshAgent.SetDestination(targetDestination);
             yield return null;
 
+            // Wait until the NPC reaches the target
             yield return MoveTowardsTarget(target, navMeshAgent);
 
+            // Clean up after movement is complete
             FinishMovement(animator, target);
         }
 
+        /// <summary>
+        ///     Validates whether the target is reachable via the NavMesh.
+        /// </summary>
+        /// <param name="target">The target GameObject to validate.</param>
+        /// <returns>True if the target is valid and reachable, false otherwise.</returns>
         private bool IsTargetValid(GameObject target)
         {
+            // Check if the target exists and is active in the scene
             if (target == null || !target.activeInHierarchy)
             {
                 ConvaiLogger.DebugLog("MoveTo target is null or inactive.", ConvaiLogger.LogCategory.Actions);
@@ -635,14 +682,15 @@ namespace Convai.Scripts.Runtime.Features
 
             NavMeshAgent navMeshAgent = _currentNPC.GetComponent<NavMeshAgent>();
             Vector3 destination = CalculateTargetDestination(target);
-    
-            // Vérifie que la destination est sur le NavMesh
+
+            // Check that the destination is on the NavMesh within a 2-unit radius
             if (!NavMesh.SamplePosition(destination, out NavMeshHit hit, 2f, NavMesh.AllAreas))
             {
-                ConvaiLogger.DebugLog($"Destination de {target.name} hors du NavMesh.", ConvaiLogger.LogCategory.Actions);
+                ConvaiLogger.DebugLog($"Destination of {target.name} is off the NavMesh.", ConvaiLogger.LogCategory.Actions);
                 return false;
             }
 
+            // Calculate the full path to verify it is reachable
             NavMeshPath path = new NavMeshPath();
             navMeshAgent.CalculatePath(hit.position, path);
 
@@ -657,71 +705,110 @@ namespace Convai.Scripts.Runtime.Features
             return true;
         }
 
+        /// <summary>
+        ///     Sets up the walking animation and disables automatic NavMesh rotation so we can handle it manually.
+        /// </summary>
         private void SetupAnimationAndNavigation(Animator animator, NavMeshAgent navMeshAgent)
         {
+            // Play the walking animation
             animator.CrossFade(Animator.StringToHash("Walking"), 0.01f);
+            // Disable root motion so the NavMeshAgent drives movement
             animator.applyRootMotion = false;
+            // Disable automatic rotation so we can rotate manually towards movement direction
             navMeshAgent.updateRotation = false;
         }
 
+        /// <summary>
+        ///     Calculates the destination position snapped to the nearest point on the NavMesh.
+        /// </summary>
+        /// <param name="target">The target GameObject.</param>
+        /// <returns>The closest valid NavMesh position near the target.</returns>
         private Vector3 CalculateTargetDestination(GameObject target)
         {
             Vector3 targetDestination = target.transform.position;
-    
-            // Cherche le point le plus proche sur le NavMesh
+
+            // Snap the destination to the nearest point on the NavMesh within a 2-unit radius
             if (NavMesh.SamplePosition(targetDestination, out NavMeshHit hit, 2f, NavMesh.AllAreas))
             {
                 return hit.position;
             }
-    
+
             return targetDestination;
         }
 
+        /// <summary>
+        ///     Coroutine that waits for the NPC to reach the target, rotating towards the movement direction each frame.
+        /// </summary>
         private IEnumerator MoveTowardsTarget(GameObject target, NavMeshAgent navMeshAgent)
         {
             float rotationSpeed = 5;
+
+            // Keep moving until the NPC is within stopping distance of the target
             while (navMeshAgent.remainingDistance > navMeshAgent.stoppingDistance)
             {
+                // Stop if the target was deactivated during movement
                 if (!target.activeInHierarchy)
                 {
                     ConvaiLogger.DebugLog("Target deactivated during movement.", ConvaiLogger.LogCategory.Actions);
                     yield break;
                 }
 
+                // Wait a frame if the agent is not moving yet
                 if (navMeshAgent.velocity.sqrMagnitude < Mathf.Epsilon) yield return null;
 
+                // Smoothly rotate towards the movement direction
                 RotateTowardsMovementDirection(navMeshAgent, rotationSpeed);
                 yield return null;
             }
         }
 
+        /// <summary>
+        ///     Smoothly rotates the NPC towards its current movement direction.
+        /// </summary>
         private void RotateTowardsMovementDirection(NavMeshAgent navMeshAgent, float rotationSpeed)
         {
             Quaternion rotation = Quaternion.LookRotation(navMeshAgent.velocity.normalized);
+            // Lock X and Z axis to only rotate on the horizontal plane
             rotation.x = 0;
             rotation.z = 0;
             transform.rotation = Quaternion.Slerp(transform.rotation, rotation, rotationSpeed * Time.deltaTime);
         }
 
+        /// <summary>
+        ///     Called when the NPC finishes moving. Resets animation and re-enables root motion.
+        /// </summary>
         private void FinishMovement(Animator animator, GameObject target)
         {
+            // Return to idle animation
             animator.CrossFade(Animator.StringToHash("Idle"), 0.1f);
+
+            // Rotate towards the camera only if this is the only action
             if (_actions.Count == 1 && Camera.main != null) StartCoroutine(RotateTowardsCamera());
+
+            // Re-enable root motion after movement
             animator.applyRootMotion = true;
+
+            // Notify listeners that the MoveTo action has ended
             ActionEnded?.Invoke("MoveTo", target);
         }
 
+        /// <summary>
+        ///     Coroutine that smoothly rotates the NPC to face the main camera after moving.
+        /// </summary>
         private IEnumerator RotateTowardsCamera()
         {
             if (Camera.main != null)
             {
+                // Calculate the direction from the NPC to the camera
                 Vector3 direction = (Camera.main.transform.position - transform.position).normalized;
                 Quaternion targetRotation = Quaternion.LookRotation(direction);
                 float elapsedTime = 0f;
                 float rotationTime = 2f;
 
+                // Smoothly rotate over 2 seconds
                 while (elapsedTime < rotationTime)
                 {
+                    // Lock rotation to the Y axis only
                     targetRotation.x = 0;
                     targetRotation.z = 0;
                     transform.rotation =
@@ -817,17 +904,30 @@ namespace Convai.Scripts.Runtime.Features
             ActionEnded?.Invoke("PickUp", target);
         }
 
+        /// <summary>
+        ///     Drops a previously picked up target GameObject back into the world.
+        /// </summary>
+        /// <param name="target">The target GameObject to drop.</param>
         private void Drop(GameObject target)
         {
+            // Notify listeners that the Drop action has started
             ActionStarted?.Invoke("Drop", target);
 
-            if (target == null) return;
+            // Check if the target is null before proceeding
+            if (target == null)
+            {
+                ConvaiLogger.DebugLog("Target is null! Exiting Drop function.", ConvaiLogger.LogCategory.Actions);
+                return;
+            }
 
             ConvaiLogger.DebugLog($"Dropping Target: {target.name}", ConvaiLogger.LogCategory.Actions);
+
+            // Detach the object from the NPC, place it at the NPC's feet, and reactivate it
             target.transform.parent = null;
             target.transform.position = transform.position;
             target.SetActive(true);
 
+            // Notify listeners that the Drop action has ended
             ActionEnded?.Invoke("Drop", target);
         }
 
@@ -859,17 +959,21 @@ namespace Convai.Scripts.Runtime.Features
             ActionEnded?.Invoke("Jump", _currentNPC.gameObject); // ← à la fin comme Crouch
         }
 
-        // STEP 3: Add the function for your action here.
+        /// <summary>
+        ///     Coroutine to throw a target GameObject in the NPC's forward direction.
+        ///     Plays a throwing animation, detaches the object, and applies physics forces.
+        /// </summary>
+        /// <param name="target">The target GameObject to throw. Must have a Rigidbody.</param>
         private IEnumerator Throw(GameObject target)
         {
-            // ✅ Vérifier que la cible existe
+            // Check that the target exists
             if (target == null)
             {
                 ConvaiLogger.DebugLog("Throw target is null!", ConvaiLogger.LogCategory.Actions);
                 yield break;
             }
 
-            // ✅ Vérifier que la cible a un Rigidbody
+            // Check that the target has a Rigidbody to apply physics forces
             Rigidbody rb = target.GetComponent<Rigidbody>();
             if (rb == null)
             {
@@ -877,72 +981,108 @@ namespace Convai.Scripts.Runtime.Features
                 yield break;
             }
 
-            _currentNPC.GetComponent<Animator>().CrossFade(Animator.StringToHash("Throwing"), 0.05f);
-            yield return new WaitForSeconds(1.5f);
+            ActionStarted?.Invoke("Throw", target);
 
+            Animator animator = _currentNPC.GetComponent<Animator>();
+
+            // Play the throwing animation
+            animator.CrossFadeInFixedTime(Animator.StringToHash("Throwing"), 0.05f);
+
+            // Wait for the Animator to transition into the throwing state
+            yield return new WaitForSeconds(0.11f);
+
+            // Get the actual length of the throwing animation clip
+            AnimatorClipInfo[] clipInfo = animator.GetCurrentAnimatorClipInfo(0);
+            float animLength = (clipInfo != null && clipInfo.Length > 0) ? clipInfo[0].clip.length : 1.5f;
+
+            // Wait until halfway through the animation before releasing the object
+            yield return new WaitForSeconds(animLength * 0.5f);
+
+            // Detach the object from the NPC and reposition it slightly in front
             target.transform.parent = null;
             target.transform.position += new Vector3(0.5f, 1.0f, 0.5f);
             target.transform.rotation = Quaternion.identity;
-
             target.SetActive(true);
 
+            // Enable physics on the thrown object
             rb.isKinematic = false;
             rb.useGravity = true;
             rb.linearVelocity = Vector3.zero;
             rb.angularVelocity = Vector3.zero;
 
+            // Apply a force combining the NPC's forward and upward direction
             Vector3 throwDirection = (_currentNPC.transform.up + _currentNPC.transform.forward).normalized;
             rb.AddForce(throwDirection * 10f, ForceMode.VelocityChange);
 
-            yield return new WaitForSeconds(1.5f);
-            _currentNPC.GetComponent<Animator>().CrossFade(Animator.StringToHash("Idle"), 0.05f);
+            // Wait for the second half of the animation to finish
+            yield return new WaitForSeconds(animLength * 0.5f);
+
+            // Return to idle animation with a smooth transition
+            animator.CrossFadeInFixedTime(Animator.StringToHash("Idle"), 0.1f);
+
+            ActionEnded?.Invoke("Throw", target);
         }
 
+        /// <summary>
+        ///     Coroutine to make the NPC vault over an obstacle and move to the target.
+        ///     Activates NavMesh links temporarily to allow passage through barriers.
+        /// </summary>
+        /// <param name="target">The target GameObject to move to after vaulting.</param>
         private IEnumerator PassThroughAndMoveTo(GameObject target)
         {
+            // Notify listeners that the PassThrough action has started
             ActionStarted?.Invoke("PassThrough", _currentNPC.gameObject);
+
             Animator animator = _currentNPC.GetComponent<Animator>();
             VaultingConvai vault = _currentNPC.GetComponent<VaultingConvai>();
 
+            // Signal the vaulting system to begin
             vault.toVault = true;
 
-            // ✅ Juste activer le link — pas besoin de désactiver les obstacles
+            // Activate all NavMesh links in the scene to allow crossing barriers
             NavMeshLink[] navLinks = FindObjectsOfType<NavMeshLink>();
             foreach (var link in navLinks) link.enabled = true;
 
-            // ✅ Le NavMesh recalcule automatiquement avec le link actif
+            // Wait briefly for the NavMesh to recalculate with the active links
             yield return new WaitForSeconds(0.5f);
 
-            // ✅ Traverser vers la barrière via le link
+            // Move to the target through the now-accessible link
             yield return MoveTo(target);
 
+            // Wait briefly after crossing
             yield return new WaitForSeconds(0.3f);
+
+            // Stop vaulting
             vault.toVault = false;
 
-            // ✅ Désactiver le link après traversée
+            // Disable all NavMesh links again to restore normal pathfinding
             foreach (var link in navLinks) link.enabled = false;
 
+            // Return to idle animation
             animator.CrossFade(Animator.StringToHash("Idle"), 0.1f);
+
+            // Notify listeners that the PassThrough action has ended
             ActionEnded?.Invoke("PassThrough", _currentNPC.gameObject);
         }
+
 
         public class MatchTargetParameters
         {
             public Vector3 matchPos;
             public Vector3 matchPosWeight;
-
             public AvatarTarget matchBodyPart;
-
             public float matchStartTime;
             public float matchTargetTime;
-
-
-
         }
 
+    /// <summary>
+        ///     Applies root motion matching to align the NPC's body part with a target position during an animation.
+        /// </summary>
         private void MatchTarget(global::MatchTargetParameters matchTargetParams)
         {
             Animator m_animator = _currentNPC.GetComponent<Animator>();
+
+            // Do not apply match target if already matching or in a transition
             if (m_animator.isMatchingTarget || m_animator.IsInTransition(0)) return;
 
             m_animator.MatchTarget(
@@ -955,6 +1095,9 @@ namespace Convai.Scripts.Runtime.Features
             );
         }
 
+       /// <summary>
+        ///     Coroutine that plays a vaulting animation, optionally rotating and matching a target position.
+        /// </summary>
         public IEnumerator PerformVaulting(string animName, global::MatchTargetParameters matchTargetParameters = null,
             Quaternion targetRotation = new Quaternion(), bool shouldRotate = false, bool mirrored = false)
         {
@@ -962,23 +1105,25 @@ namespace Convai.Scripts.Runtime.Features
             Animator m_animator = _currentNPC.GetComponent<Animator>();
             Rigidbody m_rigidBody = _currentNPC.GetComponent<Rigidbody>();
 
+            // Mark the NPC as vaulting and freeze its velocity
             IsVaulting = true;
             m_rigidBody.linearVelocity = Vector3.zero;
             m_rigidBody.angularVelocity = Vector3.zero;
 
+            // Enable the vaulting state in the Animator and play the animation
             m_animator.SetBool("IsVaulting", true);
             m_animator.CrossFadeInFixedTime(animName, 0.2f);
 
-
+            // Wait for the transition into the vaulting animation to start
             float timeout = 3f;
             float timer = 0f;
-
             yield return new WaitUntil(() =>
             {
                 timer += Time.deltaTime;
                 return m_animator.IsInTransition(0) || timer >= timeout;
             });
 
+            // Wait for the transition to finish
             timer = 0f;
             yield return new WaitUntil(() =>
             {
@@ -986,60 +1131,61 @@ namespace Convai.Scripts.Runtime.Features
                 return !m_animator.IsInTransition(0) || timer >= timeout;
             });
 
-
+            // Get the length of the vault animation (85% to avoid overshooting the end)
             var animState = m_animator.GetCurrentAnimatorStateInfo(0);
             float animLength = animState.length > 0 ? animState.length * 0.85f : 1f;
 
             float rotateStartTime = (matchTargetParameters != null) ? matchTargetParameters.matchStartTime : 0f;
             float time = 0.0f;
 
+            // Play the vault animation frame by frame, applying rotation and IK matching as needed
             while (time <= animLength)
             {
                 time += Time.deltaTime;
                 float normalizedTime = time / animLength;
 
+                // Rotate towards the target rotation if required
                 if (shouldRotate && normalizedTime > rotateStartTime)
-                {
-                    transform.rotation = Quaternion.Slerp(transform.rotation,
-                        targetRotation, rotationSpeed * Time.deltaTime);
-                }
+                    transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
 
+                // Apply match target to align the NPC's body with the vault obstacle
                 if (matchTargetParameters != null && normalizedTime <= matchTargetParameters.matchTargetTime)
                     MatchTarget(matchTargetParameters);
 
                 yield return null;
             }
 
+            // End the vaulting state
             m_animator.SetBool("IsVaulting", false);
             IsVaulting = false;
-            Debug.Log("Vault terminé");
+            Debug.Log("Vault finished");
         }
+
     
 
+        /// <summary>
+        ///     Coroutine to make the NPC walk to a chair and sit down.
+        ///     Blocks PlayActionList until StandUp is called.
+        /// </summary>
+        /// <param name="target">The chair GameObject. Must have a Chair component with a sitPoint assigned.</param>
         private IEnumerator Sit(GameObject target)
         {
+            // Notify listeners that the Sit action has started
             ActionStarted?.Invoke("Sit", _currentNPC.gameObject);
+
             NavMeshAgent navMeshAgent = _currentNPC.GetComponent<NavMeshAgent>();
             Animator m_animator = _currentNPC.GetComponent<Animator>();
 
-            if (target == null) { Debug.LogError("Sit : target est null"); yield break; }
-            if (!target.TryGetComponent<Chair>(out Chair chair)) { Debug.LogError("Sit : pas de script Chair"); yield break; }
-            if (chair.sitPoint == null) { Debug.LogError("Sit : sitPoint non assigné"); yield break; }
+            // Validate target and chair component
+            if (target == null) { Debug.LogError("Sit: target is null"); yield break; }
+            if (!target.TryGetComponent<Chair>(out Chair chair)) { Debug.LogError("Sit: no Chair script on target"); yield break; }
+            if (chair.sitPoint == null) { Debug.LogError("Sit: sitPoint not assigned on chair"); yield break; }
             if (chair.isOccupied) yield break;
 
-            //chair.isOccupied = true;
-
-            // Utilise la même logique que MoveTo qui fonctionne déjà
-            //m_animator.CrossFade(Animator.StringToHash("Walking"), 0.01f);
-            //m_animator.applyRootMotion = false;
-            //navMeshAgent.updateRotation = false;
+            // Set the NavMeshAgent destination to the sit point
             navMeshAgent.SetDestination(chair.sitPoint.position);
 
-            // Attend que le chemin soit calculé d'abord
-            //yield return new WaitUntil(() => !navMeshAgent.pathPending);
-
-            // Attend l'arrivée avec un timeout de sécurité
-            // Attend l'arrivée
+            // Wait for the NPC to arrive, with a 10-second timeout as a safety net
             float timeout = 10f;
             float timer = 0f;
             while (navMeshAgent.remainingDistance > 0.5f)
@@ -1049,71 +1195,105 @@ namespace Convai.Scripts.Runtime.Features
                 yield return null;
             }
 
-// Attends une frame supplémentaire pour que FinishMovement se termine
+            // Wait two extra frames to let FinishMovement complete fully
             yield return null;
             yield return null;
 
-// Maintenant snap
+            // Stop the NavMeshAgent and snap the NPC to the exact sit position and rotation
             navMeshAgent.isStopped = true;
             navMeshAgent.velocity = Vector3.zero;
             transform.position = chair.sitPoint.position;
             transform.rotation = chair.sitPoint.rotation;
+
+            // Disable root motion so the animation does not move the NPC away from the chair
             m_animator.applyRootMotion = false;
+
+            // Trigger the sitting animation via the Animator parameter
             m_animator.SetBool("IsSitting", true);
 
+            // Disable head tracking body rotation while sitting
             if (TryGetComponent<ConvaiHeadTracking>(out var headTracking))
                 headTracking.SetActionRunning(true);
 
-            isSitting = true;
+            // Mark the chair as occupied
+            //chair.isOccupied = true;
 
-// Mémorise la position assise
+            // Mark the NPC as sitting in code
+            isSitting = true;
+            
+            // Store the sit position and rotation to lock the NPC in place each frame
             Vector3 sitPosition = chair.sitPoint.position;
             Quaternion sitRotation = chair.sitPoint.rotation;
 
-// Coroutine interne pour forcer la position
+            // Start the position lock coroutine to prevent physics or animation from moving the NPC
             StartCoroutine(LockPosition(sitPosition, sitRotation));
 
-            //yield return new WaitUntil(() => !isSitting);
-            Debug.Log("WaitUntil terminé !");
+
+            // Notify listeners that the Sit action has ended
             ActionEnded?.Invoke("Sit", _currentNPC.gameObject);
         }
         
+        /// <summary>
+        ///     Coroutine to make the NPC stand up from a chair and return to idle.
+        /// </summary>
         private IEnumerator StandUp()
         {
+            // Notify listeners that the StandUp action has started
             ActionStarted?.Invoke("StandUp", _currentNPC.gameObject);
-            Debug.Log($"StandUp appelé, isSitting = {isSitting}");
-            if (!isSitting) { Debug.LogWarning("StandUp : pas assis, on ignore"); yield break; }
-            
+
+            Debug.Log($"StandUp called, isSitting = {isSitting}");
+
+            // Only proceed if the NPC is currently sitting
+            if (!isSitting) { Debug.LogWarning("StandUp: not sitting, ignoring"); yield break; }
+
             Animator m_animator = _currentNPC.GetComponent<Animator>();
             NavMeshAgent navMeshAgent = _currentNPC.GetComponent<NavMeshAgent>();
 
+            // Unblock the WaitUntil in Sit()
             isSitting = false;
+
+            // Trigger the stand up animation via the Animator parameter
             m_animator.SetBool("IsSitting", false);
 
+            // Re-enable the NavMeshAgent and place it correctly on the NavMesh
             navMeshAgent.isStopped = false;
             navMeshAgent.Warp(transform.position);
             m_animator.applyRootMotion = true;
+
+            // Return to idle animation
             m_animator.CrossFadeInFixedTime(Animator.StringToHash("Idle"), 0.1f);
 
-// Attends que le NavMeshAgent soit bien replacé sur le NavMesh
+            // Wait briefly then confirm the agent is back on the NavMesh before allowing new actions
             yield return new WaitForSeconds(0.2f);
             yield return new WaitUntil(() => navMeshAgent.isOnNavMesh);
 
+            // Re-enable head tracking
             if (TryGetComponent<ConvaiHeadTracking>(out var headTracking))
                 headTracking.SetActionRunning(false);
 
-            Debug.Log("StandUp : debout !");
+            Debug.Log("StandUp: standing!");
+
+            // Notify listeners that the StandUp action has ended
             ActionEnded?.Invoke("StandUp", _currentNPC.gameObject);
         }
+        /// <summary>
+        ///     Coroutine that locks the NPC's position and rotation every frame while sitting,
+        ///     preventing physics, root motion or other forces from moving the character.
+        /// </summary>
+        /// <param name="position">The world position to lock to.</param>
+        /// <param name="rotation">The world rotation to lock to.</param>
         private IEnumerator LockPosition(Vector3 position, Quaternion rotation)
         {
+            // Hold the NPC at the sit position every frame until they stand up
             while (isSitting)
             {
                 transform.position = position;
                 transform.rotation = rotation;
                 yield return null;
             }
-            // Warp après l'assise pour replacer l'agent
+
+            // Once no longer sitting, warp the NavMeshAgent to the current position
+            // to ensure it is correctly placed on the NavMesh
             NavMeshAgent agent = _currentNPC.GetComponent<NavMeshAgent>();
             if (agent != null) agent.Warp(transform.position);
         }
