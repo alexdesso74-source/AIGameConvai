@@ -39,7 +39,7 @@ public class AutoRegisterInteractable : MonoBehaviour
         newArray[newArray.Length - 1] = newObject;
         interactablesData.Objects = newArray;
 
-        Debug.Log($"{gameObject.name} ajouté à ConvaiInteractablesData.");
+        Debug.Log($"{gameObject.name} add to ConvaiInteractablesData.");
     }
 
     private void OnDestroy()
@@ -52,6 +52,6 @@ public class AutoRegisterInteractable : MonoBehaviour
             .Where(o => o.gameObject != gameObject)
             .ToArray();
 
-        Debug.Log($"{gameObject.name} retiré de ConvaiInteractablesData.");
+        Debug.Log($"{gameObject.name} remove from ConvaiInteractablesData.");
     }
 }

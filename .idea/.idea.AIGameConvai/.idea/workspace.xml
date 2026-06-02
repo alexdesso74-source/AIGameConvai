@@ -3,12 +3,217 @@
   <component name="ChangeListManager">
     <list default="true" id="e7c5b9b3-d0ca-449e-8b85-1d3630c5be6b" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.AIGameConvai/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.AIGameConvai/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Convai/Art/Resources/Masculine NPC Animator.controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Convai/Art/Resources/Masculine NPC Animator.controller" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Convai/Scripts/Runtime/Features/Actions/ConvaiActionsHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Convai/Scripts/Runtime/Features/Actions/ConvaiActionsHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Convai/Scripts/Runtime/Features/Actions.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Convai/Scripts/Runtime/Features/Actions/ConvaiActionsHandler.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Convai/Scripts/Runtime/Features/Actions/ConvaiActionsHandler.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Convai/Scripts/Runtime/Features/Actions/ConvaiInteractablesData.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Convai/Scripts/Runtime/Features/Actions/ConvaiInteractablesData.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs NPC/Convai NPC Steve Variant.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs NPC/Convai NPC Steve Variant.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/Convai Demo - Actions/Convai Demo - Actions 1.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Convai Demo - Actions/Convai Demo - Actions 1.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/Convai Demo - Actions/Convai Demo - Actions.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Convai Demo - Actions/Convai Demo - Actions.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Convai Demo - Actions/NavMesh-Ground.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Convai Demo - Actions/NavMesh-Ground.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Nature Scene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Nature Scene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/AutoRegisterInteractable.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/AutoRegisterInteractable.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Materials.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Materials/chair1mat.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Materials/chair1mat.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Materials/chair2mat.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Materials/chair2mat.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Materials/chair3mat.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Materials/chair3mat.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Materials/chair4mat.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Materials/chair4mat.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Materials/chair5mat.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Materials/chair5mat.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Materials/table1mat.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Materials/table1mat.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Materials/table2mat.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Materials/table2mat.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Materials/table3mat.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Materials/table3mat.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Materials/table4mat.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Materials/table4mat.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Materials/table5mat.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Materials/table5mat.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Models.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Models/Chair1.fbx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Models/Chair1.fbx.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Models/Chair2.fbx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Models/Chair2.fbx.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Models/Chair3.fbx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Models/Chair3.fbx.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Models/Chair4.fbx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Models/Chair4.fbx.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Models/Chair5.fbx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Models/Chair5.fbx.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Models/Table1.fbx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Models/Table1.fbx.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Models/Table2.fbx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Models/Table2.fbx.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Models/Table3.fbx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Models/Table3.fbx.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Models/Table4.fbx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Models/Table4.fbx.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Models/Table5.fbx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Models/Table5.fbx.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Prefabs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Prefabs/Chair1.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Prefabs/Chair1.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Prefabs/Chair2.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Prefabs/Chair2.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Prefabs/Chair3.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Prefabs/Chair3.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Prefabs/Chair4.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Prefabs/Chair4.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Prefabs/Chair5.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Prefabs/Chair5.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Prefabs/Table1.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Prefabs/Table1.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Prefabs/Table2.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Prefabs/Table2.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Prefabs/Table3.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Prefabs/Table3.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Prefabs/Table4.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Prefabs/Table4.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Prefabs/Table5.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Prefabs/Table5.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Sample Sccene.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Sample Sccene/Sample.unity" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Sample Sccene/Sample.unity.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Texture Maps.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Texture Maps/chair1material.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Texture Maps/chair1material/Chair1_Base_color.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Texture Maps/chair1material/Chair1_Base_color.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Texture Maps/chair1material/Chair1_Height.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Texture Maps/chair1material/Chair1_Height.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Texture Maps/chair1material/Chair1_Metallic.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Texture Maps/chair1material/Chair1_Metallic.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Texture Maps/chair1material/Chair1_Mixed_AO.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Texture Maps/chair1material/Chair1_Mixed_AO.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Texture Maps/chair1material/Chair1_Normal_OpenGL.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Texture Maps/chair1material/Chair1_Normal_OpenGL.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Texture Maps/chair1material/Chair1_Roughness.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Texture Maps/chair1material/Chair1_Roughness.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Texture Maps/chair2material.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Texture Maps/chair2material/Chair2_Base_color.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Texture Maps/chair2material/Chair2_Base_color.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Texture Maps/chair2material/Chair2_Height.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Texture Maps/chair2material/Chair2_Height.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Texture Maps/chair2material/Chair2_Metallic.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Texture Maps/chair2material/Chair2_Metallic.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Texture Maps/chair2material/Chair2_Mixed_AO.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Texture Maps/chair2material/Chair2_Mixed_AO.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Texture Maps/chair2material/Chair2_Normal_OpenGL.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Texture Maps/chair2material/Chair2_Normal_OpenGL.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Texture Maps/chair2material/Chair2_Roughness.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Texture Maps/chair2material/Chair2_Roughness.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Texture Maps/chair3material.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Texture Maps/chair3material/Chair3_Base_color.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Texture Maps/chair3material/Chair3_Base_color.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Texture Maps/chair3material/Chair3_Height.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Texture Maps/chair3material/Chair3_Height.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Texture Maps/chair3material/Chair3_Metallic.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Texture Maps/chair3material/Chair3_Metallic.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Texture Maps/chair3material/Chair3_Mixed_AO.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Texture Maps/chair3material/Chair3_Mixed_AO.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Texture Maps/chair3material/Chair3_Normal_OpenGL.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Texture Maps/chair3material/Chair3_Normal_OpenGL.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Texture Maps/chair3material/Chair3_Roughness.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Texture Maps/chair3material/Chair3_Roughness.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Texture Maps/chair4material.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Texture Maps/chair4material/Chair4_Base_color.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Texture Maps/chair4material/Chair4_Base_color.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Texture Maps/chair4material/Chair4_Height.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Texture Maps/chair4material/Chair4_Height.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Texture Maps/chair4material/Chair4_Metallic.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Texture Maps/chair4material/Chair4_Metallic.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Texture Maps/chair4material/Chair4_Mixed_AO.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Texture Maps/chair4material/Chair4_Mixed_AO.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Texture Maps/chair4material/Chair4_Normal_OpenGL.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Texture Maps/chair4material/Chair4_Normal_OpenGL.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Texture Maps/chair4material/Chair4_Roughness.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Texture Maps/chair4material/Chair4_Roughness.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Texture Maps/chair5material.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Texture Maps/chair5material/Chair5_Base_color.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Texture Maps/chair5material/Chair5_Base_color.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Texture Maps/chair5material/Chair5_Height.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Texture Maps/chair5material/Chair5_Height.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Texture Maps/chair5material/Chair5_Metallic.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Texture Maps/chair5material/Chair5_Metallic.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Texture Maps/chair5material/Chair5_Mixed_AO.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Texture Maps/chair5material/Chair5_Mixed_AO.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Texture Maps/chair5material/Chair5_Normal_OpenGL.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Texture Maps/chair5material/Chair5_Normal_OpenGL.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Texture Maps/chair5material/Chair5_Roughness.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Texture Maps/chair5material/Chair5_Roughness.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Texture Maps/table1material.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Texture Maps/table1material/Table1_Base_color.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Texture Maps/table1material/Table1_Base_color.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Texture Maps/table1material/Table1_Height.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Texture Maps/table1material/Table1_Height.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Texture Maps/table1material/Table1_Metallic.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Texture Maps/table1material/Table1_Metallic.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Texture Maps/table1material/Table1_Mixed_AO.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Texture Maps/table1material/Table1_Mixed_AO.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Texture Maps/table1material/Table1_Normal_OpenGL.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Texture Maps/table1material/Table1_Normal_OpenGL.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Texture Maps/table1material/Table1_Roughness.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Texture Maps/table1material/Table1_Roughness.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Texture Maps/table2material.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Texture Maps/table2material/Table2_Base_color.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Texture Maps/table2material/Table2_Base_color.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Texture Maps/table2material/Table2_Height.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Texture Maps/table2material/Table2_Height.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Texture Maps/table2material/Table2_Metallic.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Texture Maps/table2material/Table2_Metallic.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Texture Maps/table2material/Table2_Mixed_AO.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Texture Maps/table2material/Table2_Mixed_AO.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Texture Maps/table2material/Table2_Normal_OpenGL.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Texture Maps/table2material/Table2_Normal_OpenGL.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Texture Maps/table2material/Table2_Roughness.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Texture Maps/table2material/Table2_Roughness.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Texture Maps/table3material.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Texture Maps/table3material/Table3_Base_color.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Texture Maps/table3material/Table3_Base_color.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Texture Maps/table3material/Table3_Height.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Texture Maps/table3material/Table3_Height.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Texture Maps/table3material/Table3_Metallic.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Texture Maps/table3material/Table3_Metallic.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Texture Maps/table3material/Table3_Mixed_AO.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Texture Maps/table3material/Table3_Mixed_AO.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Texture Maps/table3material/Table3_Normal_OpenGL.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Texture Maps/table3material/Table3_Normal_OpenGL.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Texture Maps/table3material/Table3_Roughness.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Texture Maps/table3material/Table3_Roughness.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Texture Maps/table4material.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Texture Maps/table4material/Table4_Base_color.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Texture Maps/table4material/Table4_Base_color.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Texture Maps/table4material/Table4_Height.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Texture Maps/table4material/Table4_Height.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Texture Maps/table4material/Table4_Metallic.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Texture Maps/table4material/Table4_Metallic.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Texture Maps/table4material/Table4_Mixed_AO.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Texture Maps/table4material/Table4_Mixed_AO.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Texture Maps/table4material/Table4_Normal_OpenGL.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Texture Maps/table4material/Table4_Normal_OpenGL.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Texture Maps/table4material/Table4_Roughness.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Texture Maps/table4material/Table4_Roughness.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Texture Maps/table5material.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Texture Maps/table5material/Table5_Base_color.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Texture Maps/table5material/Table5_Base_color.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Texture Maps/table5material/Table5_Height.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Texture Maps/table5material/Table5_Height.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Texture Maps/table5material/Table5_Metallic.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Texture Maps/table5material/Table5_Metallic.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Texture Maps/table5material/Table5_Mixed_AO.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Texture Maps/table5material/Table5_Mixed_AO.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Texture Maps/table5material/Table5_Normal_OpenGL.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Texture Maps/table5material/Table5_Normal_OpenGL.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Texture Maps/table5material/Table5_Roughness.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tables and Chairs/Texture Maps/table5material/Table5_Roughness.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packages/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/manifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packages/packages-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/packages-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,6 +230,7 @@
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.inputsystem@57d0e36f6123/InputSystem/Devices/Commands/QueryEnabledStateCommand.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.inputsystem@57d0e36f6123/InputSystem/Devices/Commands/SetIMECursorPositionCommand.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
+  <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 8,
   &quot;fromUser&quot;: false
@@ -98,12 +304,15 @@
       <workItem from="1779357009196" duration="9654000" />
       <workItem from="1779787317949" duration="11109000" />
       <workItem from="1779893411864" duration="1349000" />
+      <workItem from="1779960874685" duration="8232000" />
+      <workItem from="1780389188677" duration="2326000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="UnityCheckinConfiguration" checkUnsavedScenes="true" />
   <component name="UnityProjectConfiguration" hasMinimizedUI="true" />
   <component name="UnityProjectDiscoverer">
     <option name="hasUnityReference" value="true" />
