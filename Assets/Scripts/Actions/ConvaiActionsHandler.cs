@@ -938,16 +938,16 @@ namespace Convai.Scripts.Runtime.Features
             Animator animator = _currentNPC.GetComponent<Animator>();
             Rigidbody rb = GetComponent<Rigidbody>();
 
-            // Appliquer la force une seule fois
-            rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z); // reset Y
+            
+            rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z); 
             rb.AddForce(new Vector3(0f, 5f, 0f), ForceMode.Impulse);
 
             animator.CrossFadeInFixedTime(Animator.StringToHash("Jumping"), 0.1f);
 
-            // Attendre que l'animation démarre
+            
             yield return new WaitForSeconds(0.11f);
 
-            // Récupérer la durée réelle du clip comme AnimationActions et Crouch
+            
             AnimatorClipInfo[] clipInfo = animator.GetCurrentAnimatorClipInfo(0);
             float length = (clipInfo != null && clipInfo.Length > 0) ? clipInfo[0].clip.length : 1.5f;
 
@@ -956,7 +956,7 @@ namespace Convai.Scripts.Runtime.Features
             animator.CrossFadeInFixedTime(Animator.StringToHash("Idle"), 0.1f);
 
             yield return null;
-            ActionEnded?.Invoke("Jump", _currentNPC.gameObject); // ← à la fin comme Crouch
+            ActionEnded?.Invoke("Jump", _currentNPC.gameObject); 
         }
 
         /// <summary>

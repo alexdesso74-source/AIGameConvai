@@ -2871,11 +2871,15 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 1897212083}
     m_Modifications:
+    - target: {fileID: 2394162930331988853, guid: d2b00f35f650b624ebf8db31ffde151c, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3563167939161442330, guid: d2b00f35f650b624ebf8db31ffde151c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 12.11
+      value: 2.5219002
       objectReference: {fileID: 0}
     - target: {fileID: 3563167939161442330, guid: d2b00f35f650b624ebf8db31ffde151c, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2883,11 +2887,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3563167939161442330, guid: d2b00f35f650b624ebf8db31ffde151c, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -16.25
+      value: -9.244528
       objectReference: {fileID: 0}
     - target: {fileID: 3563167939161442330, guid: d2b00f35f650b624ebf8db31ffde151c, type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.0033040484
+      value: -0.0033035865
       objectReference: {fileID: 0}
     - target: {fileID: 3563167939161442330, guid: d2b00f35f650b624ebf8db31ffde151c, type: 3}
       propertyPath: m_LocalRotation.x
@@ -2913,9 +2917,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3961007276801273843, guid: d2b00f35f650b624ebf8db31ffde151c, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4195449330917118624, guid: d2b00f35f650b624ebf8db31ffde151c, type: 3}
       propertyPath: m_Name
       value: Chair1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8630296464898480646, guid: d2b00f35f650b624ebf8db31ffde151c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8630296464898480646, guid: d2b00f35f650b624ebf8db31ffde151c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8630296464898480646, guid: d2b00f35f650b624ebf8db31ffde151c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.501
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2925,6 +2945,11 @@ PrefabInstance:
 --- !u!1 &896381809 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4195449330917118624, guid: d2b00f35f650b624ebf8db31ffde151c, type: 3}
+  m_PrefabInstance: {fileID: 803441431}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &896381810 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3563167939161442330, guid: d2b00f35f650b624ebf8db31ffde151c, type: 3}
   m_PrefabInstance: {fileID: 803441431}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &918364852
@@ -3716,6 +3741,12 @@ PrefabInstance:
     - target: {fileID: 3610757981640571484, guid: 69dd98fa71bd5e649969b163d693f61b, type: 3}
       propertyPath: m_Name
       value: Convai Essentials
+      objectReference: {fileID: 0}
+    - target: {fileID: 4163013979173717404, guid: 69dd98fa71bd5e649969b163d693f61b, type: 3}
+      propertyPath: m_text
+      value: " AI Actions \n\n- Jump\n- Crouch\n- MoveTo [Area]\n- PickUp [Object]\n-
+        Drop [Object]\n- Throw [Object]\n- PassThrough [Obstacle] \n- Sit [Chair]\n-
+        StandUp"
       objectReference: {fileID: 0}
     - target: {fileID: 6260753959023308940, guid: 69dd98fa71bd5e649969b163d693f61b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -6034,6 +6065,7 @@ Transform:
   - {fileID: 1645379366}
   - {fileID: 660844689}
   - {fileID: 522841570}
+  - {fileID: 896381810}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1910847927
@@ -7840,4 +7872,3 @@ SceneRoots:
   - {fileID: 323725164765024747}
   - {fileID: 1897212083}
   - {fileID: 1862021523}
-  - {fileID: 803441431}
