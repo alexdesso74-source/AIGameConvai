@@ -1,0 +1,21 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class TypeGameButton : MonoBehaviour
+{
+    private GameManager gameManager;
+    public int typeGame;
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start()
+    {
+        gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
+
+    }
+
+    public void SetTypeGame()
+    {
+        gameManager.StartGame( typeGame);
+    }
+}

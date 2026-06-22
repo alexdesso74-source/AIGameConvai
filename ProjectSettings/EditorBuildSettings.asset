@@ -9,8 +9,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Menu Scene.unity
     guid: d2cf9dd83551b9b4eb82fd7a52ad0493
   - enabled: 1
-    path: Assets/Convai/Demo/Scenes/Features/Actions/Convai Demo - Actions/Convai
-      Demo - Actions.unity
+    path: Assets/Scenes/Convai Demo - Actions/Convai Demo - Actions.unity
     guid: acd4ee7ac6a42b5458509f298b88af15
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}

@@ -7,11 +7,7 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    
     public GameObject titleScreen;
-    private int score;
-    
-    public Button restartButton;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -34,5 +30,10 @@ public class GameManager : MonoBehaviour
         //convaiCharacter.SetActive(true);
         SceneManager.LoadScene(type);
         titleScreen.SetActive(false);
+    }
+    
+    public void QuitButton()
+    {
+        Application.Quit();
     }
 }

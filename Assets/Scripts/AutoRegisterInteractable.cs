@@ -17,13 +17,13 @@ public class AutoRegisterInteractable : MonoBehaviour
             return;
         }
 
-        // ✅ Vérifier si déjà enregistré
+
         bool alreadyRegistered = interactablesData.Objects
             .Any(o => o.gameObject == gameObject);
 
         if (alreadyRegistered) return;
 
-        // ✅ Créer le nouvel objet
+
         ConvaiInteractablesData.Object newObject = new ConvaiInteractablesData.Object()
         {
             Name = string.IsNullOrEmpty(objectName) ? gameObject.name : objectName,
@@ -31,7 +31,7 @@ public class AutoRegisterInteractable : MonoBehaviour
             gameObject = gameObject
         };
 
-        // ✅ Redimensionner le tableau et ajouter
+
         ConvaiInteractablesData.Object[] newArray = 
             new ConvaiInteractablesData.Object[interactablesData.Objects.Length + 1];
         
@@ -39,7 +39,7 @@ public class AutoRegisterInteractable : MonoBehaviour
         newArray[newArray.Length - 1] = newObject;
         interactablesData.Objects = newArray;
 
-        Debug.Log($"{gameObject.name} ajouté à ConvaiInteractablesData.");
+        Debug.Log($"{gameObject.name} add to ConvaiInteractablesData.");
     }
 
     private void OnDestroy()
@@ -47,11 +47,11 @@ public class AutoRegisterInteractable : MonoBehaviour
         ConvaiInteractablesData interactablesData = FindObjectOfType<ConvaiInteractablesData>();
         if (interactablesData == null) return;
 
-        // ✅ Retirer du tableau
+
         interactablesData.Objects = interactablesData.Objects
             .Where(o => o.gameObject != gameObject)
             .ToArray();
 
-        Debug.Log($"{gameObject.name} retiré de ConvaiInteractablesData.");
+        Debug.Log($"{gameObject.name} remove from ConvaiInteractablesData.");
     }
 }
